@@ -16,7 +16,7 @@ public class HealthBarViewer : HealthViewer
         SetFilledArea();
     }
 
-    protected override void OnHealthChanged(float healthValue)
+    protected override void OnChanged(float healthValue)
     {
         ChangeValue(healthValue);
     }

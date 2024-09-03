@@ -7,7 +7,7 @@ public class HealthBarSmoothlyViewer : HealthBarViewer
     
     private Coroutine _coroutine;
     
-    protected override void OnHealthChanged(float healthValue)
+    protected override void OnChanged(float healthValue)
     {
         if (_coroutine is not null) 
             StopCoroutine(_coroutine);

@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public abstract class HealthViewer : MonoBehaviour
 {
@@ -7,13 +6,13 @@ public abstract class HealthViewer : MonoBehaviour
     
     private void OnEnable()
     {
-        Health.HealthChanged += OnHealthChanged;
+        Health.Changed += OnChanged;
     }
 
     private void OnDisable()
     {
-        Health.HealthChanged -= OnHealthChanged;
+        Health.Changed -= OnChanged;
     }
     
-    protected abstract void OnHealthChanged(float healthValue);
+    protected abstract void OnChanged(float healthValue);
 }

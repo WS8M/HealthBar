@@ -6,7 +6,7 @@ public class Health : MonoBehaviour
     [SerializeField] private float _maxValue;
     private float _value;
 
-    public event Action<float> HealthChanged;
+    public event Action<float> Changed;
     public event Action TookDamage;
     public event Action Died;
     
@@ -23,7 +23,7 @@ public class Health : MonoBehaviour
             
             _value = Mathf.Clamp(value, 0, _maxValue);
             
-            HealthChanged?.Invoke(_value);
+            Changed?.Invoke(_value);
             
             if (_value == 0)
                 Died?.Invoke();
