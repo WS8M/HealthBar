@@ -9,5 +9,5 @@ public class HealthTextViewer : HealthViewer
         _text.text = BuildText(healthValue);
 
     private string BuildText(float value) => 
-        $"{value}|{UnitHealth.MaxHealth}";
+        $"{value}|{Health.MaxValue}";
 }

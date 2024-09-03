@@ -1,56 +1,54 @@
 using System;
 using UnityEngine;
 
-public class UnitHealth : MonoBehaviour
+public class Health : MonoBehaviour
 {
-    [SerializeField] private float _maxHealth;
-
-    private float _health;
+    [SerializeField] private float _maxValue;
+    private float _value;
 
     public event Action<float> HealthChanged;
     public event Action TookDamage;
     public event Action Died;
-
-    private void Awake()
+    
+    public float MaxValue => _maxValue;
+    
+    public float Value
     {
-        Health = _maxHealth;
-    }
-
-    public float Health
-    {
-        get => _health;
+        get => _value;
 
         private set
         {
-            if(value == _health)
+            if(value == _value)
                 return;
             
-            _health = Mathf.Clamp(value, 0, _maxHealth);
-
+            _value = Mathf.Clamp(value, 0, _maxValue);
             
-            HealthChanged?.Invoke(_health);
+            HealthChanged?.Invoke(_value);
             
-            if (_health == 0)
+            if (_value == 0)
                 Died?.Invoke();
         }
     }
-
-    public float MaxHealth => _maxHealth;
+    
+    private void Awake()
+    {
+        Value = _maxValue;
+    }
 
     public void TakeDamage(float damage)
     {
         if (damage < 0)
             throw new ArgumentOutOfRangeException(nameof(damage));
 
-        Health -= damage;
+        Value -= damage;
         TookDamage?.Invoke();
     }
 
-    public void Healing(float healingValue)
+    public void TakeHealing(float healingValue)
     {
         if (healingValue < 0)
             throw new ArgumentOutOfRangeException(nameof(healingValue));
 
-        Health += healingValue;
+        Value += healingValue;
     }
 }
